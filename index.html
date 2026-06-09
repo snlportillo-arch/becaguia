@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BecaGuia — Tu Asesor de Becas con IA</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f2d5e;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      background: #0a1f42;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 2px solid #f5c842;
+    }
+
+    header .logo-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #f5c842;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    header .title-group h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    header .title-group p {
+      font-size: 13px;
+      color: #a8c8ff;
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .status-text {
+      font-size: 13px;
+      color: #22c55e;
+      font-weight: 500;
+    }
+
+    .hero {
+      width: 100%;
+      max-width: 720px;
+      padding: 32px 24px 16px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: #a8c8ff;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .pill {
+      background: #1a3f7a;
+      color: #a8c8ff;
+      font-size: 13px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid #2a5fa0;
+    }
+
+    .chat-hint {
+      background: #1a3f7a;
+      border: 1px solid #2a5fa0;
+      border-radius: 12px;
+      padding: 16px 20px;
+      max-width: 720px;
+      width: 90%;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .chat-hint h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #f5c842;
+      margin-bottom: 10px;
+    }
+
+    .chat-hint ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .chat-hint ul li {
+      font-size: 13px;
+      color: #a8c8ff;
+      padding-left: 4px;
+    }
+
+    .chat-hint ul li::before {
+      content: "→ ";
+      color: #f5c842;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 16px;
+      font-size: 12px;
+      color: #4a6fa0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-circle">🎓</div>
+    <div class="title-group">
+      <h1>BecaGuia</h1>
+      <p>Asesor de Becas Universitarias</p>
+    </div>
+    <div class="status-bar">
+      <div class="status-dot"></div>
+      <span class="status-text">En línea 24/7</span>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h2>Tu Asesor de Becas con Inteligencia Artificial</h2>
+    <p>Haz cualquier pregunta sobre becas, FAFSA, essays, deadlines y más.<br>
+    Respuesta inmediata en español, disponible las 24 horas.</p>
+    <div class="pills">
+      <span class="pill">Becas universitarias</span>
+      <span class="pill">FAFSA y ayuda financiera</span>
+      <span class="pill">Essays y aplicaciones</span>
+      <span class="pill">Deadlines importantes</span>
+      <span class="pill">Preparación desde High School</span>
+    </div>
+  </div>
+
+  <div class="chat-hint">
+    <h3>Puedes preguntarme cosas como:</h3>
+    <ul>
+      <li>¿Qué becas existen para estudiantes hispanos en Texas?</li>
+      <li>¿Cómo lleno el FAFSA si mis padres son indocumentados?</li>
+      <li>¿Cuándo debo empezar a buscar becas si estoy en 9no grado?</li>
+      <li>¿Qué debe incluir un buen essay para solicitar una beca?</li>
+      <li>¿Cuáles son los deadlines más importantes para aplicar a becas?</li>
+    </ul>
+  </div>
+
+  <footer>
+    BecaGuia &copy; 2025 &mdash; Todos los derechos reservados
+  </footer>
+
+  <!-- Chatbot de Flowise -->
+  <script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+    Chatbot.init({
+      chatflowid: "c5a66f50-0d08-408a-a65b-18f5d67e8951",
+      apiHost: "https://cloud.flowiseai.com",
+      theme: {
+        button: {
+          backgroundColor: "#f5c842",
+          iconColor: "#0f2d5e",
+          bottom: 24,
+          right: 24,
+        },
+        chatWindow: {
+          title: "BecaGuia — Asesor de Becas",
+          titleAvatarSrc: "",
+          welcomeMessage: "¡Hola! Soy tu asesor de becas universitarias con IA. ¿En qué puedo ayudarte hoy?",
+          backgroundColor: "#ffffff",
+          fontSize: 15,
+          botMessage: {
+            backgroundColor: "#f0f4ff",
+            textColor: "#1a1a2e",
+          },
+          userMessage: {
+            backgroundColor: "#0f2d5e",
+            textColor: "#ffffff",
+          },
+          textInput: {
+            placeholder: "Escribe tu pregunta sobre becas...",
+            backgroundColor: "#ffffff",
+            textColor: "#1a1a2e",
+            sendButtonColor: "#f5c842",
+          }
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

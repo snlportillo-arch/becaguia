@@ -74,10 +74,11 @@
       font-weight: 500;
     }
 
+    /* Sección superior con info */
     .hero {
       width: 100%;
-      max-width: 720px;
-      padding: 32px 24px 16px;
+      max-width: 900px;
+      padding: 28px 24px 12px;
       text-align: center;
     }
 
@@ -92,7 +93,7 @@
       font-size: 15px;
       color: #a8c8ff;
       line-height: 1.6;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .pills {
@@ -100,7 +101,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .pill {
@@ -112,13 +113,124 @@
       border: 1px solid #2a5fa0;
     }
 
+    /* Botón CTA */
+    .cta-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .cta-arrow {
+      font-size: 13px;
+      color: #f5c842;
+      letter-spacing: 0.5px;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+
+    .cta-btn {
+      background: #f5c842;
+      color: #0f2d5e;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(245, 200, 66, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(245, 200, 66, 0.5);
+    }
+
+    .cta-sub {
+      font-size: 12px;
+      color: #a8c8ff;
+    }
+
+    /* Ventana de chat fullpage embebida */
+    .chat-section {
+      display: none;
+      flex-direction: column;
+      width: 90%;
+      max-width: 900px;
+      margin-bottom: 32px;
+    }
+
+    .chat-section.visible {
+      display: flex;
+    }
+
+    .chat-topbar {
+      background: #0a1f42;
+      padding: 12px 20px;
+      border-radius: 16px 16px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid #2a5fa0;
+      border-bottom: none;
+    }
+
+    .chat-topbar .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #f5c842;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .chat-topbar .info h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .chat-topbar .info p {
+      font-size: 11px;
+      color: #22c55e;
+    }
+
+    /* El componente fullpage de Flowise */
+    .flowise-wrapper {
+      width: 100%;
+      height: 70vh;
+      border: 2px solid #2a5fa0;
+      border-top: none;
+      border-radius: 0 0 16px 16px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    flowise-fullchatbot {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Sugerencias de preguntas */
     .chat-hint {
       background: #1a3f7a;
       border: 1px solid #2a5fa0;
       border-radius: 12px;
       padding: 16px 20px;
-      max-width: 720px;
       width: 90%;
+      max-width: 900px;
       margin-bottom: 24px;
       text-align: left;
     }
@@ -140,7 +252,12 @@
     .chat-hint ul li {
       font-size: 13px;
       color: #a8c8ff;
-      padding-left: 4px;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+
+    .chat-hint ul li:hover {
+      color: #ffffff;
     }
 
     .chat-hint ul li::before {
@@ -174,13 +291,37 @@
   <div class="hero">
     <h2>Tu Asesor de Becas con Inteligencia Artificial</h2>
     <p>Haz cualquier pregunta sobre becas, FAFSA, essays, deadlines y más.<br>
-    Respuesta inmediata en español, disponible las 24 horas.</p>
+    Respuesta inmediata en español o inglés, disponible las 24 horas.</p>
     <div class="pills">
       <span class="pill">Becas universitarias</span>
       <span class="pill">FAFSA y ayuda financiera</span>
       <span class="pill">Essays y aplicaciones</span>
       <span class="pill">Deadlines importantes</span>
       <span class="pill">Preparación desde High School</span>
+    </div>
+  </div>
+
+  <!-- Botón CTA -->
+  <div class="cta-wrapper" id="ctaWrapper">
+    <span class="cta-arrow">▼ &nbsp;Tu asesor está listo para ayudarte</span>
+    <button class="cta-btn" onclick="abrirChat()">
+      <span class="icon">🤖</span>
+      Haz clic aquí para iniciar una conversación
+    </button>
+    <span class="cta-sub">Incluido en tu membresía · español o inglés · Respuesta inmediata</span>
+  </div>
+
+  <!-- Ventana de chat fullpage -->
+  <div class="chat-section" id="chatSection">
+    <div class="chat-topbar">
+      <div class="avatar">🎓</div>
+      <div class="info">
+        <h4>BecaGuia — Asesor IA</h4>
+        <p>● En línea ahora</p>
+      </div>
+    </div>
+    <div class="flowise-wrapper">
+      <flowise-fullchatbot></flowise-fullchatbot>
     </div>
   </div>
 
@@ -199,22 +340,15 @@
     BecaGuia &copy; 2025 &mdash; Todos los derechos reservados
   </footer>
 
-  <!-- Chatbot de Flowise -->
   <script type="module">
     import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
-    Chatbot.init({
+
+    Chatbot.initFull({
       chatflowid: "c5a66f50-0d08-408a-a65b-18f5d67e8951",
       apiHost: "https://cloud.flowiseai.com",
       theme: {
-        button: {
-          backgroundColor: "#f5c842",
-          iconColor: "#0f2d5e",
-          bottom: 24,
-          right: 24,
-        },
         chatWindow: {
           title: "BecaGuia — Asesor de Becas",
-          titleAvatarSrc: "",
           welcomeMessage: "¡Hola! Soy tu asesor de becas universitarias con IA. ¿En qué puedo ayudarte hoy?",
           backgroundColor: "#ffffff",
           fontSize: 15,
@@ -235,6 +369,13 @@
         }
       }
     })
+
+    window.abrirChat = function() {
+      document.getElementById('ctaWrapper').style.display = 'none';
+      const section = document.getElementById('chatSection');
+      section.classList.add('visible');
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
   </script>
 
 </body>
